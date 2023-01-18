@@ -18,7 +18,7 @@ public class VentanaClientes extends javax.swing.JFrame {
     
     public VentanaClientes() {
         initComponents();
-        setTitle("Supermercado Univalle");
+        setTitle("upermercado Univalle");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
