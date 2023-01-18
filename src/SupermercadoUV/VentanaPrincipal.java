@@ -38,7 +38,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         //Gestión de imagenes
               
-        ImageIcon banner = new ImageIcon(getClass().getResource("/Images/BannerUVA.png")) ;
+        ImageIcon banner = new ImageIcon(getClass().getResource("/Images/BannerUVM.png")) ;
         Icon iconBanner = new ImageIcon(banner.getImage().getScaledInstance(LabelBannerUV.getWidth(), LabelBannerUV.getHeight(), Image.SCALE_DEFAULT));
         LabelBannerUV.setIcon(iconBanner);
         
