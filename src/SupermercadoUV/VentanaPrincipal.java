@@ -8,19 +8,39 @@ import javax.swing.ImageIcon;
  *
  * @author Andres
  */
+
+
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-   
-    public VentanaPrincipal() {
+    private VentanaProductos productos;
+    private VentanaClientes clientes;
+    private VentanaProveedores proveedores;
+    private VentanaVentas ventas;
+    
+    
+    public VentanaPrincipal(VentanaProductos productos, VentanaClientes clientes, VentanaProveedores proveedores, VentanaVentas ventas) {
         initComponents();
         setTitle("Supermercado Univalle");
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        productos.setRoot(this);
+        clientes.setRoot(this);
+        /*proveedores.setRoot(this);
+        ventas.setRoot(this);*/
+
+        
+        this.productos = productos;
+        this.clientes = clientes;
+        this.proveedores = proveedores;
+        this.ventas = ventas;
+       
         
         //Gestión de imagenes
               
-        ImageIcon banner = new ImageIcon(getClass().getResource("/Images/BannerSuper.png")) ;
-        Icon iconBanner = new ImageIcon(banner.getImage().getScaledInstance(jLabel3.getWidth(), jLabel3.getHeight(), Image.SCALE_DEFAULT));
-        jLabel3.setIcon(iconBanner);
+        ImageIcon banner = new ImageIcon(getClass().getResource("/Images/BannerUVM.png")) ;
+        Icon iconBanner = new ImageIcon(banner.getImage().getScaledInstance(LabelBannerUV.getWidth(), LabelBannerUV.getHeight(), Image.SCALE_DEFAULT));
+        LabelBannerUV.setIcon(iconBanner);
         
         
         
@@ -32,99 +52,141 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        Ventana = new javax.swing.JPanel();
+        buttonProductos = new javax.swing.JButton();
+        buttonClientes = new javax.swing.JButton();
+        buttonProveedores = new javax.swing.JButton();
+        buttonVentas = new javax.swing.JButton();
+        LabelBannerUV = new javax.swing.JLabel();
+        labeImagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Ventana.setBackground(new java.awt.Color(255, 255, 255));
+        Ventana.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 153, 255));
-        jButton1.setFont(new java.awt.Font("Sitka Small", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("PRODUCTOS");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonProductos.setBackground(new java.awt.Color(255, 153, 255));
+        buttonProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonProductos.setForeground(new java.awt.Color(0, 0, 0));
+        buttonProductos.setText("PRODUCTOS");
+        buttonProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonProductosActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 160, 50));
+        Ventana.add(buttonProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 160, 50));
 
-        jButton2.setBackground(new java.awt.Color(255, 153, 255));
-        jButton2.setFont(new java.awt.Font("Sitka Small", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("CLIENTES");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonClientes.setBackground(new java.awt.Color(255, 153, 255));
+        buttonClientes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonClientes.setForeground(new java.awt.Color(0, 0, 0));
+        buttonClientes.setText("CLIENTES");
+        buttonClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buttonClientesActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 160, 50));
+        Ventana.add(buttonClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 160, 50));
 
-        jButton3.setBackground(new java.awt.Color(255, 153, 255));
-        jButton3.setFont(new java.awt.Font("Sitka Small", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("PROVEEDORES");
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 160, 50));
+        buttonProveedores.setBackground(new java.awt.Color(255, 153, 255));
+        buttonProveedores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonProveedores.setForeground(new java.awt.Color(0, 0, 0));
+        buttonProveedores.setText("PROVEEDORES");
+        buttonProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonProveedoresActionPerformed(evt);
+            }
+        });
+        Ventana.add(buttonProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 160, 50));
 
-        jButton4.setBackground(new java.awt.Color(255, 153, 255));
-        jButton4.setFont(new java.awt.Font("Sitka Small", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("VENTAS");
-        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 160, 50));
+        buttonVentas.setBackground(new java.awt.Color(255, 153, 255));
+        buttonVentas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonVentas.setForeground(new java.awt.Color(0, 0, 0));
+        buttonVentas.setText("VENTAS");
+        buttonVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonVentasActionPerformed(evt);
+            }
+        });
+        Ventana.add(buttonVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 160, 50));
 
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setFont(new java.awt.Font("Sitka Small", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText(" ");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, -10, 450, 190));
+        LabelBannerUV.setBackground(new java.awt.Color(0, 0, 0));
+        LabelBannerUV.setFont(new java.awt.Font("Sitka Small", 0, 24)); // NOI18N
+        LabelBannerUV.setForeground(new java.awt.Color(0, 0, 0));
+        LabelBannerUV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelBannerUV.setText(" ");
+        Ventana.add(LabelBannerUV, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, -10, 450, 200));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FiguraPM.png"))); // NOI18N
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, -1, -1));
+        labeImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FiguraPM.png"))); // NOI18N
+        Ventana.add(labeImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Ventana, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Ventana, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void buttonProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProductosActionPerformed
+        IniciarProductos();
+    }//GEN-LAST:event_buttonProductosActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void buttonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClientesActionPerformed
+        IniciarClientes();
+    }//GEN-LAST:event_buttonClientesActionPerformed
 
+    private void buttonProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProveedoresActionPerformed
+        IniciarProveedores();
+    }//GEN-LAST:event_buttonProveedoresActionPerformed
+
+    private void buttonVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVentasActionPerformed
+        IniciarVentas();
+    }//GEN-LAST:event_buttonVentasActionPerformed
+
+    
+    public void IniciarProductos() {
+        this.productos.setVisible(true);
+        this.setVisible(false);
+    }
+    
+    
+    public void IniciarClientes() {
+        this.clientes.setVisible(true);
+        this.setVisible(false);
+    }
+    
+    
+    public void IniciarProveedores() {
+        this.proveedores.setVisible(true);
+        this.setVisible(false);
+    }
+    
+    
+    public void IniciarVentas() {
+        this.ventas.setVisible(true);
+        this.setVisible(false);
+    }
+    
   
     public static void main(String args[]) {
         //--
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel LabelBannerUV;
+    private javax.swing.JPanel Ventana;
+    private javax.swing.JButton buttonClientes;
+    private javax.swing.JButton buttonProductos;
+    private javax.swing.JButton buttonProveedores;
+    private javax.swing.JButton buttonVentas;
+    private javax.swing.JLabel labeImagen;
     // End of variables declaration//GEN-END:variables
 }
