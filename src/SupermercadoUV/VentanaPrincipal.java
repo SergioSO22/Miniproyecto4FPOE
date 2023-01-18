@@ -20,7 +20,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     public VentanaPrincipal(VentanaProductos productos, VentanaClientes clientes, VentanaProveedores proveedores, VentanaVentas ventas) {
         initComponents();
-        setTitle("Supermercado Univalle  ");
+        setTitle("Mercado Univalle  ");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
