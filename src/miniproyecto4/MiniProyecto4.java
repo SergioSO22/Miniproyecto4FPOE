@@ -9,7 +9,7 @@ public class MiniProyecto4 {
 
     
     public static void main(String[] args) {
-        System.out.println("Aqui iniciamos el Proyecto 4");
+        System.out.println(" Aqui iniciamos el Proyecto 4 ");
     }
     
 }
