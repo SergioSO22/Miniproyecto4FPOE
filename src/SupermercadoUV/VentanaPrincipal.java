@@ -20,14 +20,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     public VentanaPrincipal(VentanaProductos productos, VentanaClientes clientes, VentanaProveedores proveedores, VentanaVentas ventas) {
         initComponents();
-        setTitle("Supermercado Univalle  ");
+        setTitle("Mercado Univalle ");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         productos.setRoot(this);
         clientes.setRoot(this);
-        /*proveedores.setRoot(this);
-        ventas.setRoot(this);*/
+        proveedores.setRoot(this);
+        ventas.setRoot(this);
 
         
         this.productos = productos;
@@ -38,7 +38,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         //Gestión de imagenes
               
-        ImageIcon banner = new ImageIcon(getClass().getResource("/Images/BannerUVA.png")) ;
+        ImageIcon banner = new ImageIcon(getClass().getResource("/Images/BannerUVM.png")) ;
         Icon iconBanner = new ImageIcon(banner.getImage().getScaledInstance(LabelBannerUV.getWidth(), LabelBannerUV.getHeight(), Image.SCALE_DEFAULT));
         LabelBannerUV.setIcon(iconBanner);
         
