@@ -1,5 +1,6 @@
 package SupermercadoUV;
 
+import java.awt.Color;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -30,11 +31,27 @@ public class VentanaVentas extends javax.swing.JFrame {
         Icon iconAdd = new ImageIcon(add.getImage().getScaledInstance(imageAdd.getWidth(), imageAdd.getHeight(), Image.SCALE_DEFAULT));
         imageAdd.setIcon(iconAdd);
         
+        ImageIcon gaseosa = new ImageIcon(getClass().getResource("/Images/Gaseosa.jpg")) ;
+        Icon iconGaseosa = new ImageIcon(gaseosa.getImage().getScaledInstance(lGaseosa.getWidth(), lGaseosa.getHeight(), Image.SCALE_DEFAULT));
+        lGaseosa.setIcon(iconGaseosa);
+        
+        ImageIcon cafe = new ImageIcon(getClass().getResource("/Images/Cafe.png")) ;
+        Icon iconCafe = new ImageIcon(cafe.getImage().getScaledInstance(lCafe.getWidth(), lCafe.getHeight(), Image.SCALE_DEFAULT));
+        lCafe.setIcon(iconCafe);
+        
+ 
+        
+        
+        
+        
+        //Desabilito que se puedan editar los campos.
+        
         FieldPrecio.setEnabled(false);
         FieldIva.setEnabled(false);
         FieldProducto.setEnabled(false);
         FieldSubtotal.setEnabled(false);
         FieldTotal.setEnabled(false);
+        FieldCantidad.getEditor().getComponent(0).setBackground(new java.awt.Color(204, 153, 255));
     }
 
     
@@ -42,18 +59,18 @@ public class VentanaVentas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        Ventana = new javax.swing.JPanel();
         buttonAtras = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lCrema = new javax.swing.JLabel();
         imageAdd = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        LabelTotal = new javax.swing.JLabel();
+        lCafe = new javax.swing.JLabel();
+        lCerveza = new javax.swing.JLabel();
+        lManzana = new javax.swing.JLabel();
+        lAlmuerzo = new javax.swing.JLabel();
+        lPan = new javax.swing.JLabel();
+        lShampoo = new javax.swing.JLabel();
+        lJabon = new javax.swing.JLabel();
+        LabelCop = new javax.swing.JLabel();
         LabelProducto = new javax.swing.JLabel();
         LabelPrecio = new javax.swing.JLabel();
         FieldCantidad = new javax.swing.JSpinner();
@@ -69,14 +86,14 @@ public class VentanaVentas extends javax.swing.JFrame {
         FieldIva = new javax.swing.JTextField();
         LabelBannerUV = new javax.swing.JLabel();
         LabelTotal1 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lGaseosa = new javax.swing.JLabel();
+        ImagenA = new javax.swing.JLabel();
+        imagenM = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Ventana.setBackground(new java.awt.Color(255, 255, 255));
+        Ventana.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonAtras.setBackground(new java.awt.Color(153, 255, 204));
         buttonAtras.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -87,56 +104,49 @@ public class VentanaVentas extends javax.swing.JFrame {
                 buttonAtrasActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 100, 30));
+        Ventana.add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 100, 30));
 
-        jLabel1.setText("Producto ");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 380, 100, 120));
-        jPanel1.add(imageAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 100, 100));
+        lCrema.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Ventana.add(lCrema, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 380, 100, 120));
+        Ventana.add(imageAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 100, 100));
 
-        jLabel4.setText("Producto ");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 90, 100, 120));
+        lCafe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Ventana.add(lCafe, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 90, 100, 120));
 
-        jLabel5.setText("Producto ");
-        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, 100, 120));
+        lCerveza.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Ventana.add(lCerveza, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, 100, 120));
 
-        jLabel6.setText("Producto ");
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 100, 120));
+        lManzana.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Ventana.add(lManzana, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 100, 120));
 
-        jLabel7.setText("Producto ");
-        jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 100, 120));
+        lAlmuerzo.setText(" ");
+        lAlmuerzo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Ventana.add(lAlmuerzo, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 100, 120));
 
-        jLabel8.setText("Producto ");
-        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 230, 100, 120));
+        lPan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Ventana.add(lPan, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 230, 100, 120));
 
-        jLabel9.setText("Producto ");
-        jLabel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 380, 100, 120));
+        lShampoo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Ventana.add(lShampoo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 380, 100, 120));
 
-        jLabel10.setText("Producto ");
-        jLabel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 380, 100, 120));
+        lJabon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Ventana.add(lJabon, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 380, 100, 120));
 
-        LabelTotal.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        LabelTotal.setForeground(new java.awt.Color(0, 0, 0));
-        LabelTotal.setText("$ COP");
-        jPanel1.add(LabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 560, 90, 60));
+        LabelCop.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        LabelCop.setForeground(new java.awt.Color(0, 0, 0));
+        LabelCop.setText("$ COP");
+        Ventana.add(LabelCop, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 560, 90, 60));
 
         LabelProducto.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         LabelProducto.setForeground(new java.awt.Color(0, 0, 0));
         LabelProducto.setText("PRODUCTO:");
-        jPanel1.add(LabelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+        Ventana.add(LabelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         LabelPrecio.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         LabelPrecio.setForeground(new java.awt.Color(0, 0, 0));
         LabelPrecio.setText("PRECIO:");
-        jPanel1.add(LabelPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
-        jPanel1.add(FieldCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 200, -1));
+        Ventana.add(LabelPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+        Ventana.add(FieldCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 200, -1));
 
         TablaProductos.setBackground(new java.awt.Color(204, 204, 255));
         TablaProductos.setForeground(new java.awt.Color(0, 0, 0));
@@ -156,22 +166,22 @@ public class VentanaVentas extends javax.swing.JFrame {
         TablaProductos.setSelectionForeground(new java.awt.Color(153, 153, 153));
         jScrollPane1.setViewportView(TablaProductos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, 280));
+        Ventana.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, 280));
 
         LabelCantidad.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         LabelCantidad.setForeground(new java.awt.Color(0, 0, 0));
         LabelCantidad.setText("CANTIDAD:");
-        jPanel1.add(LabelCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+        Ventana.add(LabelCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         LabelSubtotal.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         LabelSubtotal.setForeground(new java.awt.Color(0, 0, 0));
         LabelSubtotal.setText("SUBTOTAL:");
-        jPanel1.add(LabelSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, -1));
+        Ventana.add(LabelSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, -1));
 
         LabelIva.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         LabelIva.setForeground(new java.awt.Color(0, 0, 0));
         LabelIva.setText("IVA:");
-        jPanel1.add(LabelIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 650, -1, -1));
+        Ventana.add(LabelIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 650, -1, -1));
 
         FieldPrecio.setBackground(new java.awt.Color(204, 153, 255));
         FieldPrecio.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +189,7 @@ public class VentanaVentas extends javax.swing.JFrame {
                 FieldPrecioActionPerformed(evt);
             }
         });
-        jPanel1.add(FieldPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 200, -1));
+        Ventana.add(FieldPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 200, -1));
 
         FieldTotal.setBackground(new java.awt.Color(204, 153, 255));
         FieldTotal.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +197,7 @@ public class VentanaVentas extends javax.swing.JFrame {
                 FieldTotalActionPerformed(evt);
             }
         });
-        jPanel1.add(FieldTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 572, 210, 30));
+        Ventana.add(FieldTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 572, 210, 30));
 
         FieldProducto.setBackground(new java.awt.Color(204, 153, 255));
         FieldProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +205,7 @@ public class VentanaVentas extends javax.swing.JFrame {
                 FieldProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(FieldProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 200, -1));
+        Ventana.add(FieldProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 200, -1));
 
         FieldSubtotal.setBackground(new java.awt.Color(204, 153, 255));
         FieldSubtotal.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +213,7 @@ public class VentanaVentas extends javax.swing.JFrame {
                 FieldSubtotalActionPerformed(evt);
             }
         });
-        jPanel1.add(FieldSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 610, 200, -1));
+        Ventana.add(FieldSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 610, 200, -1));
 
         FieldIva.setBackground(new java.awt.Color(204, 153, 255));
         FieldIva.addActionListener(new java.awt.event.ActionListener() {
@@ -211,40 +221,41 @@ public class VentanaVentas extends javax.swing.JFrame {
                 FieldIvaActionPerformed(evt);
             }
         });
-        jPanel1.add(FieldIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 650, 200, -1));
+        Ventana.add(FieldIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 650, 200, -1));
 
         LabelBannerUV.setBackground(new java.awt.Color(0, 0, 0));
         LabelBannerUV.setFont(new java.awt.Font("Sitka Small", 0, 24)); // NOI18N
         LabelBannerUV.setForeground(new java.awt.Color(0, 0, 0));
         LabelBannerUV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelBannerUV.setText(" ");
-        jPanel1.add(LabelBannerUV, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 280, 150));
+        Ventana.add(LabelBannerUV, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 280, 150));
 
         LabelTotal1.setFont(new java.awt.Font("Segoe UI Emoji", 0, 28)); // NOI18N
         LabelTotal1.setForeground(new java.awt.Color(0, 0, 0));
         LabelTotal1.setText("TOTAL:");
-        jPanel1.add(LabelTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 560, 90, 60));
+        Ventana.add(LabelTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 560, 90, 60));
 
-        jLabel11.setText("Producto ");
-        jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, 100, 120));
+        lGaseosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Cerveza.png"))); // NOI18N
+        lGaseosa.setText(" ");
+        lGaseosa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Ventana.add(lGaseosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 70, 120));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FiguraPA.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 430, 190, 270));
+        ImagenA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FiguraPA.png"))); // NOI18N
+        Ventana.add(ImagenA, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 430, 190, 270));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FiguraPM.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 520, 360, 280));
+        imagenM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FiguraPM.png"))); // NOI18N
+        Ventana.add(imagenM, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 520, 360, 280));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Ventana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Ventana, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -291,29 +302,29 @@ public class VentanaVentas extends javax.swing.JFrame {
     private javax.swing.JTextField FieldProducto;
     private javax.swing.JTextField FieldSubtotal;
     private javax.swing.JTextField FieldTotal;
+    private javax.swing.JLabel ImagenA;
     private javax.swing.JLabel LabelBannerUV;
     private javax.swing.JLabel LabelCantidad;
+    private javax.swing.JLabel LabelCop;
     private javax.swing.JLabel LabelIva;
     private javax.swing.JLabel LabelPrecio;
     private javax.swing.JLabel LabelProducto;
     private javax.swing.JLabel LabelSubtotal;
-    private javax.swing.JLabel LabelTotal;
     private javax.swing.JLabel LabelTotal1;
     private javax.swing.JTable TablaProductos;
+    private javax.swing.JPanel Ventana;
     private javax.swing.JButton buttonAtras;
     private javax.swing.JLabel imageAdd;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel imagenM;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lAlmuerzo;
+    private javax.swing.JLabel lCafe;
+    private javax.swing.JLabel lCerveza;
+    private javax.swing.JLabel lCrema;
+    private javax.swing.JLabel lGaseosa;
+    private javax.swing.JLabel lJabon;
+    private javax.swing.JLabel lManzana;
+    private javax.swing.JLabel lPan;
+    private javax.swing.JLabel lShampoo;
     // End of variables declaration//GEN-END:variables
 }
