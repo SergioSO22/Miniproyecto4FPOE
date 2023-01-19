@@ -94,6 +94,7 @@ public class VentanaVentas extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 380, 100, 120));
         jPanel1.add(imageAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 100, 100));
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Gaseosa.png"))); // NOI18N
         jLabel4.setText("Producto ");
         jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 90, 100, 120));
@@ -102,10 +103,12 @@ public class VentanaVentas extends javax.swing.JFrame {
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, 100, 120));
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Almuerzo.png"))); // NOI18N
         jLabel6.setText("Producto ");
         jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 100, 120));
 
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Manzana.png"))); // NOI18N
         jLabel7.setText("Producto ");
         jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 100, 120));
@@ -156,7 +159,7 @@ public class VentanaVentas extends javax.swing.JFrame {
         TablaProductos.setSelectionForeground(new java.awt.Color(153, 153, 153));
         jScrollPane1.setViewportView(TablaProductos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, 280));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, 280));
 
         LabelCantidad.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         LabelCantidad.setForeground(new java.awt.Color(0, 0, 0));
@@ -225,9 +228,10 @@ public class VentanaVentas extends javax.swing.JFrame {
         LabelTotal1.setText("TOTAL:");
         jPanel1.add(LabelTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 560, 90, 60));
 
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Cafe.png"))); // NOI18N
         jLabel11.setText("Producto ");
         jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, 100, 120));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, 110, 120));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FiguraPA.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 430, 190, 270));
