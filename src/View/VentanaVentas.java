@@ -19,6 +19,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
 
     private VentanaPrincipal root;
     public ListaDeProductos productos;
+    public Producto products;
     
     
     public VentanaVentas(ListaDeProductos productos) {
@@ -402,71 +403,72 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
     }//GEN-LAST:event_FieldIvaActionPerformed
 
     private void lGaseosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lGaseosaActionPerformed
-        // 
+        //
     }//GEN-LAST:event_lGaseosaActionPerformed
 
     private void lCafeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lCafeActionPerformed
-        // 
     }//GEN-LAST:event_lCafeActionPerformed
 
     private void lCervezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lCervezaActionPerformed
-        // 
     }//GEN-LAST:event_lCervezaActionPerformed
 
     private void lManzanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lManzanaActionPerformed
-        añadirPrecio(productos.getProductos().get(1)); 
     }//GEN-LAST:event_lManzanaActionPerformed
 
     private void lAlmuerzoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lAlmuerzoActionPerformed
-        // 
     }//GEN-LAST:event_lAlmuerzoActionPerformed
 
     private void lPanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lPanActionPerformed
-        // 
     }//GEN-LAST:event_lPanActionPerformed
 
     private void lShampooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lShampooActionPerformed
-        // 
     }//GEN-LAST:event_lShampooActionPerformed
 
     private void lCremaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lCremaActionPerformed
-        // 
     }//GEN-LAST:event_lCremaActionPerformed
 
     private void lJabonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lJabonActionPerformed
-        // 
     }//GEN-LAST:event_lJabonActionPerformed
 
     @Override
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource() == lGaseosa){
             FieldProducto.setText("Gaseosa");
+            añadirPrecio(productos.getProductos().get(0)); 
         } else if(evento.getSource() == lCafe){
             FieldProducto.setText("Cafe");
+            añadirPrecio(productos.getProductos().get(1)); 
         } else if(evento.getSource() == lCerveza){
             FieldProducto.setText("Cerveza");
+            añadirPrecio(productos.getProductos().get(2));
         } else if(evento.getSource() == lManzana){
             FieldProducto.setText("Manzana");
+            añadirPrecio(productos.getProductos().get(3));
         } else if(evento.getSource() == lAlmuerzo){
             FieldProducto.setText("Almuerzo");
+            añadirPrecio(productos.getProductos().get(4));
         } else if(evento.getSource() == lPan){
             FieldProducto.setText("Pan");
+            añadirPrecio(productos.getProductos().get(5));
         } else if(evento.getSource() == lShampoo){
             FieldProducto.setText("Shampoo");
+            añadirPrecio(productos.getProductos().get(6));
         } else if(evento.getSource() == lCrema){
             FieldProducto.setText("Crema");
+            añadirPrecio(productos.getProductos().get(07));
         } else if(evento.getSource() == lJabon){
             FieldProducto.setText("Jabon");
+            añadirPrecio(productos.getProductos().get(8));
         } else {
            FieldProducto.setText(""); 
         } 
     }
 
-    public void añadirPrecio(Producto productos){
-        
-           if (!"Gaseosa".equals(productos.getNombre())){
-               FieldPrecio.setText(String.valueOf(productos.getPrecio()));
-           }
+    public void añadirPrecio(Producto products){
+        String textoField = FieldProducto.getText();
+        if (textoField.equals(products.getNombre())){
+            FieldPrecio.setText(String.valueOf(products.getPrecio()));
+        }
     }
     
     
