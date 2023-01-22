@@ -2,13 +2,16 @@ package View;
 
 import Model.ListaDeProductos;
 import Model.Producto;
+import Model.Ventas;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JSpinner.DefaultEditor;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +23,10 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
     private VentanaPrincipal root;
     public ListaDeProductos productos;
     public Producto products;
+    public Ventas ventas;
+    int precio = 0;
+    int cantidad = 0;
+    
     
     
     public VentanaVentas(ListaDeProductos productos) {
@@ -28,6 +35,8 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         setTitle("Supermercado Univalle");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);  
+        DefaultTableModel model = new DefaultTableModel();
+        ArrayList<Ventas> listaVentas = new ArrayList<Ventas>();
         
         
         //Gestión de imagenes
@@ -37,8 +46,8 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         LabelBannerUV.setIcon(iconBanner);
         
         ImageIcon add = new ImageIcon(getClass().getResource("/Images/Add.png")) ;
-        Icon iconAdd = new ImageIcon(add.getImage().getScaledInstance(imageAdd.getWidth(), imageAdd.getHeight(), Image.SCALE_DEFAULT));
-        imageAdd.setIcon(iconAdd);
+        Icon iconAdd = new ImageIcon(add.getImage().getScaledInstance(buttonAdd.getWidth(), buttonAdd.getHeight(), Image.SCALE_DEFAULT));
+        buttonAdd.setIcon(iconAdd);
         
         ImageIcon gaseosa = new ImageIcon(getClass().getResource("/Images/Gaseosa.jpg")) ;
         Icon iconGaseosa = new ImageIcon(gaseosa.getImage().getScaledInstance(lGaseosa.getWidth(), lGaseosa.getHeight(), Image.SCALE_DEFAULT));
@@ -97,14 +106,12 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         FieldProducto.setEnabled(false);
         FieldSubtotal.setEnabled(false);
         FieldTotal.setEnabled(false);
+        FieldImporte.setEnabled(false);
         FieldCantidad.getEditor().getComponent(0).setBackground(new java.awt.Color(204, 153, 255));
         ((DefaultEditor)FieldCantidad.getEditor()).getTextField().setEditable(false);
                
         String producto = "vacio";
-        //CalcularPrecio();
         
-        
-
     }
 
     
@@ -142,7 +149,9 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         lManzana = new javax.swing.JButton();
         lCrema = new javax.swing.JButton();
         lShampoo = new javax.swing.JButton();
-        imageAdd = new javax.swing.JButton();
+        buttonAdd = new javax.swing.JButton();
+        FieldImporte = new javax.swing.JTextField();
+        LabelImporte = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -182,13 +191,27 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         TablaProductos.setForeground(new java.awt.Color(0, 0, 0));
         TablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "PRODUCTOS", "PRECIO C/U", "CANTIDAD", "SUBTOTAL"
+
             }
         ));
         TablaProductos.setGridColor(new java.awt.Color(102, 102, 102));
@@ -196,7 +219,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         TablaProductos.setSelectionForeground(new java.awt.Color(153, 153, 153));
         jScrollPane1.setViewportView(TablaProductos);
 
-        Ventana.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, 280));
+        Ventana.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, 260));
 
         LabelCantidad.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         LabelCantidad.setForeground(new java.awt.Color(0, 0, 0));
@@ -206,12 +229,12 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         LabelSubtotal.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         LabelSubtotal.setForeground(new java.awt.Color(0, 0, 0));
         LabelSubtotal.setText("SUBTOTAL:");
-        Ventana.add(LabelSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, -1));
+        Ventana.add(LabelSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, -1, -1));
 
         LabelIva.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         LabelIva.setForeground(new java.awt.Color(0, 0, 0));
         LabelIva.setText("IVA:");
-        Ventana.add(LabelIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 650, -1, -1));
+        Ventana.add(LabelIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 660, -1, -1));
 
         FieldPrecio.setBackground(new java.awt.Color(204, 153, 255));
         FieldPrecio.setForeground(new java.awt.Color(0, 0, 0));
@@ -251,7 +274,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
                 FieldSubtotalActionPerformed(evt);
             }
         });
-        Ventana.add(FieldSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 610, 200, -1));
+        Ventana.add(FieldSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 620, 200, -1));
 
         FieldIva.setBackground(new java.awt.Color(204, 153, 255));
         FieldIva.setForeground(new java.awt.Color(0, 0, 0));
@@ -261,7 +284,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
                 FieldIvaActionPerformed(evt);
             }
         });
-        Ventana.add(FieldIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 650, 200, -1));
+        Ventana.add(FieldIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 660, 200, -1));
 
         LabelBannerUV.setBackground(new java.awt.Color(0, 0, 0));
         LabelBannerUV.setFont(new java.awt.Font("Sitka Small", 0, 24)); // NOI18N
@@ -357,9 +380,29 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         });
         Ventana.add(lShampoo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, 100, 120));
 
-        imageAdd.setBackground(new java.awt.Color(255, 255, 255));
-        imageAdd.setBorder(null);
-        Ventana.add(imageAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 90, 100));
+        buttonAdd.setBackground(new java.awt.Color(255, 255, 255));
+        buttonAdd.setBorder(null);
+        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddActionPerformed(evt);
+            }
+        });
+        Ventana.add(buttonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 90, 100));
+
+        FieldImporte.setBackground(new java.awt.Color(204, 153, 255));
+        FieldImporte.setForeground(new java.awt.Color(0, 0, 0));
+        FieldImporte.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        FieldImporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldImporteActionPerformed(evt);
+            }
+        });
+        Ventana.add(FieldImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 200, -1));
+
+        LabelImporte.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        LabelImporte.setForeground(new java.awt.Color(0, 0, 0));
+        LabelImporte.setText("IMPORTE:");
+        Ventana.add(LabelImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -430,6 +473,21 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
     private void lJabonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lJabonActionPerformed
     }//GEN-LAST:event_lJabonActionPerformed
 
+    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+        Ventas venta = new Ventas();
+        CalcularPrecio();
+        int precio = Integer.parseInt(FieldPrecio.getText());
+        int cantidad = Integer.parseInt(FieldCantidad.getValue().toString());
+        venta.setNombre(FieldProducto.getText());
+        venta.setPrecio(precio);
+        venta.setCantidad(cantidad);
+        //venta.set
+    }//GEN-LAST:event_buttonAddActionPerformed
+
+    private void FieldImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldImporteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldImporteActionPerformed
+
     @Override
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource() == lGaseosa){
@@ -471,6 +529,15 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         }
     }
     
+    public void CalcularPrecio(){
+        precio = Integer.parseInt(FieldPrecio.getText());
+        cantidad = Integer.parseInt(FieldCantidad.getValue().toString());
+        int importe = (precio*cantidad);
+        FieldImporte.setText(String.valueOf(importe));
+        System.out.println(precio);
+        System.out.println(cantidad);        
+        
+    }
     
     public void setRoot(VentanaPrincipal root) {
         this.root = root;
@@ -482,6 +549,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner FieldCantidad;
+    private javax.swing.JTextField FieldImporte;
     private javax.swing.JTextField FieldIva;
     private javax.swing.JTextField FieldPrecio;
     private javax.swing.JTextField FieldProducto;
@@ -491,6 +559,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JLabel LabelBannerUV;
     private javax.swing.JLabel LabelCantidad;
     private javax.swing.JLabel LabelCop;
+    private javax.swing.JLabel LabelImporte;
     private javax.swing.JLabel LabelIva;
     private javax.swing.JLabel LabelPrecio;
     private javax.swing.JLabel LabelProducto;
@@ -498,8 +567,8 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JLabel LabelTotal1;
     private javax.swing.JTable TablaProductos;
     private javax.swing.JPanel Ventana;
+    private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonAtras;
-    private javax.swing.JButton imageAdd;
     private javax.swing.JLabel imagenM;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton lAlmuerzo;
