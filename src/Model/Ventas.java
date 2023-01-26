@@ -1,5 +1,5 @@
 
-package SupermercadoUV;
+package Model;
 
 /**
  *
@@ -7,35 +7,44 @@ package SupermercadoUV;
  */
 
 public class Ventas {
-    String descripcion;
-    int id;
-    double precio;
+    String nombre;
+    int precio;
     int cantidad;
-
+    int importe;
+  
+    
     public Ventas() {
     }
-
-    public String getDescripcion() {
-        return descripcion;
+    
+    
+    public double getImporte() {
+        return importe;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setImporte(int importe) {
+        this.importe = importe;
+    }
+    public String getNombre() {
+        return nombre;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+/*
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
+    }*/
 
     public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 

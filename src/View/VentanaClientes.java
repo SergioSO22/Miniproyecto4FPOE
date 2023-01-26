@@ -1,4 +1,4 @@
-package SupermercadoUV;
+package View;
 
 import java.awt.Image;
 import javax.swing.Icon;
@@ -18,7 +18,7 @@ public class VentanaClientes extends javax.swing.JFrame {
     
     public VentanaClientes() {
         initComponents();
-        setTitle("upermercado Univalle");
+        setTitle("Supermercado Univalle");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
@@ -36,21 +36,21 @@ public class VentanaClientes extends javax.swing.JFrame {
         LabelBannerUV = new javax.swing.JLabel();
         Labelnombre = new javax.swing.JLabel();
         TITULO = new javax.swing.JLabel();
-        LabelApellido = new javax.swing.JLabel();
         LabelDocumento = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         LabelTelefono = new javax.swing.JLabel();
         LabelDireccion = new javax.swing.JLabel();
         LabelCorreo = new javax.swing.JLabel();
         FieldNombre = new javax.swing.JTextField();
-        FieldApellido = new javax.swing.JTextField();
         FieldTipoDocumento = new javax.swing.JComboBox<>();
         FieldDocumento = new javax.swing.JTextField();
         FieldTelefono = new javax.swing.JTextField();
         FieldDireccion = new javax.swing.JTextField();
         FieldCorreo = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        buttonGuardar = new javax.swing.JButton();
+        LabeImagen = new javax.swing.JLabel();
         buttonAtras = new javax.swing.JButton();
+        buttonAtras2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,18 +66,13 @@ public class VentanaClientes extends javax.swing.JFrame {
 
         Labelnombre.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         Labelnombre.setForeground(new java.awt.Color(0, 0, 0));
-        Labelnombre.setText("NOMBRES:");
-        Ventana.add(Labelnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, -1, -1));
+        Labelnombre.setText("NOMBRE:");
+        Ventana.add(Labelnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, -1, -1));
 
         TITULO.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         TITULO.setForeground(new java.awt.Color(0, 0, 0));
         TITULO.setText("LLENA LOS CAMPOS PARA ADICIONAR CLIENTE A LA BASE DE DATOS:");
         Ventana.add(TITULO, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
-
-        LabelApellido.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        LabelApellido.setForeground(new java.awt.Color(0, 0, 0));
-        LabelApellido.setText("APELLIDOS:");
-        Ventana.add(LabelApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, -1, -1));
 
         LabelDocumento.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         LabelDocumento.setForeground(new java.awt.Color(0, 0, 0));
@@ -115,20 +110,7 @@ public class VentanaClientes extends javax.swing.JFrame {
                 FieldNombreKeyTyped(evt);
             }
         });
-        Ventana.add(FieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 290, 200, -1));
-
-        FieldApellido.setBackground(new java.awt.Color(204, 102, 255));
-        FieldApellido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FieldApellidoActionPerformed(evt);
-            }
-        });
-        FieldApellido.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                FieldApellidoKeyTyped(evt);
-            }
-        });
-        Ventana.add(FieldApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 330, 200, -1));
+        Ventana.add(FieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 330, 200, -1));
 
         FieldTipoDocumento.setBackground(new java.awt.Color(204, 102, 255));
         FieldTipoDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CEDULA DE CIUDADANIA", "TARJETA DE IDENTIDAD", "CEDULA DE EXTRANJERIA"}));
@@ -181,8 +163,19 @@ public class VentanaClientes extends javax.swing.JFrame {
         });
         Ventana.add(FieldCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 530, 200, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FiguraGM.png"))); // NOI18N
-        Ventana.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 670, 290));
+        buttonGuardar.setBackground(new java.awt.Color(255, 153, 255));
+        buttonGuardar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonGuardar.setForeground(new java.awt.Color(0, 0, 0));
+        buttonGuardar.setText("GUARDAR");
+        buttonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGuardarActionPerformed(evt);
+            }
+        });
+        Ventana.add(buttonGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 600, 130, 50));
+
+        LabeImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FiguraGM.png"))); // NOI18N
+        Ventana.add(LabeImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 390, 670, 290));
 
         buttonAtras.setBackground(new java.awt.Color(255, 153, 255));
         buttonAtras.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -195,6 +188,17 @@ public class VentanaClientes extends javax.swing.JFrame {
         });
         Ventana.add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 130, 50));
 
+        buttonAtras2.setBackground(new java.awt.Color(255, 153, 255));
+        buttonAtras2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonAtras2.setForeground(new java.awt.Color(0, 0, 0));
+        buttonAtras2.setText("ATRAS");
+        buttonAtras2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtras2ActionPerformed(evt);
+            }
+        });
+        Ventana.add(buttonAtras2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 130, 50));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -206,7 +210,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Ventana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Ventana, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -255,21 +259,6 @@ public class VentanaClientes extends javax.swing.JFrame {
         //
     }//GEN-LAST:event_FieldTipoDocumentoActionPerformed
 
-    private void FieldApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldApellidoKeyTyped
-        //
-        char dato = evt.getKeyChar();
-
-        if (Character.isDigit(dato)) {
-            getToolkit().beep();
-            evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "INGRESE SOLO TEXTO");
-        }
-    }//GEN-LAST:event_FieldApellidoKeyTyped
-
-    private void FieldApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldApellidoActionPerformed
-        //
-    }//GEN-LAST:event_FieldApellidoActionPerformed
-
     private void FieldNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldNombreKeyTyped
         //
         char dato = evt.getKeyChar();
@@ -285,10 +274,19 @@ public class VentanaClientes extends javax.swing.JFrame {
         //
     }//GEN-LAST:event_FieldNombreActionPerformed
 
+    private void buttonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarActionPerformed
+        this.root.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_buttonGuardarActionPerformed
+
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
         this.root.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_buttonAtrasActionPerformed
+
+    private void buttonAtras2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtras2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonAtras2ActionPerformed
 
     public void setRoot(VentanaPrincipal root) {
         this.root = root;
@@ -299,14 +297,13 @@ public class VentanaClientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField FieldApellido;
     private javax.swing.JTextField FieldCorreo;
     private javax.swing.JTextField FieldDireccion;
     private javax.swing.JTextField FieldDocumento;
     private javax.swing.JTextField FieldNombre;
     private javax.swing.JTextField FieldTelefono;
     private javax.swing.JComboBox<String> FieldTipoDocumento;
-    private javax.swing.JLabel LabelApellido;
+    private javax.swing.JLabel LabeImagen;
     private javax.swing.JLabel LabelBannerUV;
     private javax.swing.JLabel LabelCorreo;
     private javax.swing.JLabel LabelDireccion;
@@ -316,7 +313,8 @@ public class VentanaClientes extends javax.swing.JFrame {
     private javax.swing.JLabel TITULO;
     private javax.swing.JPanel Ventana;
     private javax.swing.JButton buttonAtras;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton buttonAtras2;
+    private javax.swing.JButton buttonGuardar;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

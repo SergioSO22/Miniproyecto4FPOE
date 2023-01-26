@@ -1,6 +1,9 @@
 
 package View;
 
+import Control.TablaGestion;
+import Model.ListaDeProductos;
+import Model.Producto;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -14,13 +17,19 @@ import javax.swing.ImageIcon;
 public class GestionProductos extends javax.swing.JFrame {
 
     private VentanaProveedores root;
+    public ListaDeProductos productos;
+    public TablaGestion model;
 
-    public GestionProductos() {
+
+    public GestionProductos(ListaDeProductos productos) {
         initComponents();
         setTitle("Supermercado Univalle");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
+        
+        model = new TablaGestion(productos.getProductos());
+        TableProductos.setModel(model);
         
         //Gestion de Imagenes:
         ImageIcon banner = new ImageIcon(getClass().getResource("/Images/BannerUVM.png")) ;
@@ -120,7 +129,7 @@ public class GestionProductos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarActionPerformed
-        //Guardar();
+        Guardar();
     }//GEN-LAST:event_buttonGuardarActionPerformed
 
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
@@ -128,6 +137,19 @@ public class GestionProductos extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_buttonAtrasActionPerformed
 
+    public void Guardar(){
+        int fila = TableProductos.getSelectedRow();
+        
+        String producto = TableProductos.getValueAt(fila, 0).toString();
+        int precio = Integer.parseInt(this.TableProductos.getValueAt(fila, 1).toString());
+        int cantidad = Integer.parseInt(this.TableProductos.getValueAt(fila, 2).toString());
+        String categoria = TableProductos.getValueAt(fila, 3).toString();
+
+        Producto p = new Producto(producto, precio,cantidad,categoria);
+        System.out.println(p);
+    }
+    
+    
     public void setRoot(VentanaProveedores root) {
         this.root = root;
     }

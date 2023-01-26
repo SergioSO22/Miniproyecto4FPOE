@@ -1,4 +1,4 @@
-package SupermercadoUV;
+package View;
 
 import java.awt.Image;
 import javax.swing.Icon;
@@ -45,6 +45,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         
         repaint();
+    }
+
+    public VentanaPrincipal() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
    

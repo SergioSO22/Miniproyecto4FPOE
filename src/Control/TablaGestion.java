@@ -9,11 +9,12 @@ import javax.swing.table.TableModel;
  * @author Andres
  */
 
-public class TablaProductos implements TableModel{
+public class TablaGestion implements TableModel{
 
     private ArrayList<Producto> productos;
-    
-    public TablaProductos(ArrayList<Producto> lista){
+    String categoriaProveedor = "Aseo";
+
+    public TablaGestion(ArrayList<Producto> lista){
         productos = lista;
     }
     
@@ -56,7 +57,18 @@ public class TablaProductos implements TableModel{
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == 1;
+        if (categoriaProveedor == "Bebidas") {
+            return rowIndex <= 2 && columnIndex == 2;
+        } else if (categoriaProveedor == "Comida"){
+            if (rowIndex >2 && rowIndex <6){
+                if (columnIndex == 2){
+                    return true;
+                }
+            }
+            } else if (categoriaProveedor == "Aseo") {
+                return (rowIndex >5 && columnIndex == 2);
+                }
+        return false;
     }
     
 
@@ -67,17 +79,18 @@ public class TablaProductos implements TableModel{
        // int valor = null;
 
         switch (columnIndex){
-            case 0 ->  {
+            case 0: {
                 valor = p.getNombre() ;
-            }
- case 1 ->  {
+                break;
+            } case 1: {
                 valor = p.getPrecio();
-            }
- case 2 ->  {
+                break;
+            } case 2: {
                 valor = p.getCantidad();
-            }
-  case 3 ->  {
+                break;
+            }  case 3: {
                 valor = p.getCategoria();
+                break;
             }
         }
         return valor;

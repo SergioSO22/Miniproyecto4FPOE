@@ -26,8 +26,9 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
     public Ventas ventas;
     int precio = 0;
     int cantidad = 0;
-    
-    
+    DefaultTableModel model = new DefaultTableModel();
+    ArrayList<Ventas> listaVentas = new ArrayList<Ventas>();
+
     
     public VentanaVentas(ListaDeProductos productos) {
         this.productos = productos;
@@ -35,9 +36,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         setTitle("Supermercado Univalle");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);  
-        DefaultTableModel model = new DefaultTableModel();
-        ArrayList<Ventas> listaVentas = new ArrayList<Ventas>();
-        
+
         
         //Gestión de imagenes
 
@@ -110,7 +109,14 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         FieldCantidad.getEditor().getComponent(0).setBackground(new java.awt.Color(204, 153, 255));
         ((DefaultEditor)FieldCantidad.getEditor()).getTextField().setEditable(false);
                
-        String producto = "vacio";
+        //Edicion de la tabla.
+        
+        model.addColumn("PRODUCTOS");
+        model.addColumn("PRECIO U");
+        model.addColumn("CANTIDAD");
+        model.addColumn("IMPORTE");
+        
+        ActualizarTabla();
         
     }
 
@@ -126,7 +132,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         LabelPrecio = new javax.swing.JLabel();
         FieldCantidad = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaProductos = new javax.swing.JTable();
+        TablaVenta = new javax.swing.JTable();
         LabelCantidad = new javax.swing.JLabel();
         LabelSubtotal = new javax.swing.JLabel();
         LabelIva = new javax.swing.JLabel();
@@ -169,7 +175,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         });
         Ventana.add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 100, 30));
 
-        LabelCop.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        LabelCop.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
         LabelCop.setForeground(new java.awt.Color(0, 0, 0));
         LabelCop.setText("$ COP");
         Ventana.add(LabelCop, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 560, 90, 60));
@@ -185,11 +191,16 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         Ventana.add(LabelPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
         FieldCantidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+        FieldCantidad.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                FieldCantidadStateChanged(evt);
+            }
+        });
         Ventana.add(FieldCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 200, -1));
 
-        TablaProductos.setBackground(new java.awt.Color(204, 204, 255));
-        TablaProductos.setForeground(new java.awt.Color(0, 0, 0));
-        TablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+        TablaVenta.setBackground(new java.awt.Color(204, 204, 255));
+        TablaVenta.setForeground(new java.awt.Color(0, 0, 0));
+        TablaVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -214,10 +225,10 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
 
             }
         ));
-        TablaProductos.setGridColor(new java.awt.Color(102, 102, 102));
-        TablaProductos.setSelectionBackground(new java.awt.Color(255, 204, 255));
-        TablaProductos.setSelectionForeground(new java.awt.Color(153, 153, 153));
-        jScrollPane1.setViewportView(TablaProductos);
+        TablaVenta.setGridColor(new java.awt.Color(102, 102, 102));
+        TablaVenta.setSelectionBackground(new java.awt.Color(255, 204, 255));
+        TablaVenta.setSelectionForeground(new java.awt.Color(153, 153, 153));
+        jScrollPane1.setViewportView(TablaVenta);
 
         Ventana.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, 260));
 
@@ -247,6 +258,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         Ventana.add(FieldPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 200, -1));
 
         FieldTotal.setBackground(new java.awt.Color(204, 153, 255));
+        FieldTotal.setFont(new java.awt.Font("Segoe UI Emoji", 0, 28)); // NOI18N
         FieldTotal.setForeground(new java.awt.Color(0, 0, 0));
         FieldTotal.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         FieldTotal.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +266,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
                 FieldTotalActionPerformed(evt);
             }
         });
-        Ventana.add(FieldTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 572, 210, 30));
+        Ventana.add(FieldTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 562, 210, 40));
 
         FieldProducto.setBackground(new java.awt.Color(204, 153, 255));
         FieldProducto.setForeground(new java.awt.Color(0, 0, 0));
@@ -475,53 +487,87 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         Ventas venta = new Ventas();
-        CalcularPrecio();
-        int precio = Integer.parseInt(FieldPrecio.getText());
-        int cantidad = Integer.parseInt(FieldCantidad.getValue().toString());
+        
         venta.setNombre(FieldProducto.getText());
         venta.setPrecio(precio);
         venta.setCantidad(cantidad);
-        //venta.set
+        venta.setImporte(precio*cantidad);
+        
+        if(BuscarVenta(venta)){
+            listaVentas.add(venta);
+        }
+                
+                
+        listaVentas.add(venta);
+        ActualizarTabla();
+        borrarVenta();
+        
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void FieldImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldImporteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FieldImporteActionPerformed
 
+    private void FieldCantidadStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_FieldCantidadStateChanged
+        CalcularPrecio();
+    }//GEN-LAST:event_FieldCantidadStateChanged
+
     @Override
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource() == lGaseosa){
             FieldProducto.setText("Gaseosa");
             añadirPrecio(productos.getProductos().get(0)); 
+            CalcularPrecio();
         } else if(evento.getSource() == lCafe){
             FieldProducto.setText("Cafe");
             añadirPrecio(productos.getProductos().get(1)); 
+            CalcularPrecio();
         } else if(evento.getSource() == lCerveza){
             FieldProducto.setText("Cerveza");
             añadirPrecio(productos.getProductos().get(2));
+            CalcularPrecio();
         } else if(evento.getSource() == lManzana){
             FieldProducto.setText("Manzana");
             añadirPrecio(productos.getProductos().get(3));
+            CalcularPrecio();
         } else if(evento.getSource() == lAlmuerzo){
             FieldProducto.setText("Almuerzo");
             añadirPrecio(productos.getProductos().get(4));
+            CalcularPrecio();
         } else if(evento.getSource() == lPan){
             FieldProducto.setText("Pan");
             añadirPrecio(productos.getProductos().get(5));
+            CalcularPrecio();
         } else if(evento.getSource() == lShampoo){
             FieldProducto.setText("Shampoo");
             añadirPrecio(productos.getProductos().get(6));
+            CalcularPrecio();
         } else if(evento.getSource() == lCrema){
             FieldProducto.setText("Crema");
-            añadirPrecio(productos.getProductos().get(07));
+            añadirPrecio(productos.getProductos().get(7));
+            CalcularPrecio();
         } else if(evento.getSource() == lJabon){
             FieldProducto.setText("Jabon");
             añadirPrecio(productos.getProductos().get(8));
+            CalcularPrecio();
         } else {
            FieldProducto.setText(""); 
         } 
     }
 
+    
+    public boolean BuscarVenta(Ventas nueva){
+        for (Ventas v: listaVentas){
+            if(v.getNombre() == nueva.getNombre()){
+                int nuevaCantidad = v.getCantidad() + nueva.getCantidad();
+                v.setImporte((int) (v.getPrecio()* nuevaCantidad));
+                return true;
+            }
+        }
+        return false;
+    } 
+    
+    
     public void añadirPrecio(Producto products){
         String textoField = FieldProducto.getText();
         if (textoField.equals(products.getNombre())){
@@ -534,9 +580,36 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         cantidad = Integer.parseInt(FieldCantidad.getValue().toString());
         int importe = (precio*cantidad);
         FieldImporte.setText(String.valueOf(importe));
-        System.out.println(precio);
-        System.out.println(cantidad);        
+    }
+    
+    public void ActualizarTabla(){
+        while(model.getRowCount() > 0) {
+            model.removeRow(0);
+        }
+        int subtotal = 0;
         
+        for (Ventas v: listaVentas){
+            Object o[] = new Object[4];
+            o[0] = v.getNombre();
+            o[1] = v.getPrecio();
+            o[2] = v.getCantidad();
+            o[3] = v.getImporte();
+            model.addRow(o);
+            subtotal+= v.getImporte();
+        }
+        double iva = subtotal * 0.19;
+        double total = subtotal + iva;
+        
+        FieldSubtotal.setText(String.valueOf(subtotal));
+        FieldIva.setText(String.valueOf(iva));
+        FieldTotal.setText(String.valueOf(total));
+        
+        TablaVenta.setModel(model);
+    }
+    
+    public void borrarVenta(){
+        precio = 0;
+        cantidad = 0;
     }
     
     public void setRoot(VentanaPrincipal root) {
@@ -565,7 +638,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JLabel LabelProducto;
     private javax.swing.JLabel LabelSubtotal;
     private javax.swing.JLabel LabelTotal1;
-    private javax.swing.JTable TablaProductos;
+    private javax.swing.JTable TablaVenta;
     private javax.swing.JPanel Ventana;
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonAtras;
