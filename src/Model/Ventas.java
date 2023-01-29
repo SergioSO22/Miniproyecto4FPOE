@@ -1,3 +1,12 @@
+/*
+    @Proyecto: 
+    MiniProyecto #4 - Supermercado Univalle
+    @Author: 
+    Wilson Andrés Mosquera.
+    Sergio André Sanchez.
+    @Profesor:
+    Luis Yovany Romo Portilla
+*/
 
 package Model;
 
@@ -10,7 +19,7 @@ public class Ventas {
     String nombre;
     int precio;
     int cantidad;
-    int importe;
+    double importe;
   
     
     public Ventas() {
@@ -21,7 +30,7 @@ public class Ventas {
         return importe;
     }
 
-    public void setImporte(int importe) {
+    public void setImporte(double importe) {
         this.importe = importe;
     }
     public String getNombre() {
@@ -31,14 +40,6 @@ public class Ventas {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-/*
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }*/
 
     public double getPrecio() {
         return precio;

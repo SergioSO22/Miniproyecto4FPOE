@@ -1,10 +1,9 @@
 /*
-    *ListaDeAfiliados.java
-
     @Proyecto: 
-    MiniProyecto #3 - Univalle EPS
+    MiniProyecto #4 - Supermercado Univalle
     @Author: 
-    Wilson Andrés Mosquera Zapata 202182116-3743
+    Wilson Andrés Mosquera.
+    Sergio André Sanchez.
     @Profesor:
     Luis Yovany Romo Portilla
 */
@@ -12,15 +11,12 @@
 package Model;
 
 import java.util.ArrayList;
-import Model.Producto;
-import java.awt.List;
-
 
 public class ListaDeProductos {
+    
     private ArrayList<Producto> productos;
-    
-    
-     public ListaDeProductos() {
+  
+     public ListaDeProductos() { 
         
         productos = new ArrayList<>();
         
@@ -34,10 +30,13 @@ public class ListaDeProductos {
         productos.add(new Producto("Crema", 7400, 20, "Aseo"));
         productos.add(new Producto("Jabón", 3600, 20, "Aseo"));
     } 
+    
      
     public ArrayList<Producto> getProductos() {
        return productos;
     }
+    
 }
+
 
 

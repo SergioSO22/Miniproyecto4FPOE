@@ -1,9 +1,26 @@
+/*
+    @Proyecto: 
+    MiniProyecto #4 - Supermercado Univalle
+    @Author: 
+    Wilson Andrés Mosquera.
+    Sergio André Sanchez.
+    @Profesor:
+    Luis Yovany Romo Portilla
+*/
+
 package View;
 
+import Control.Save;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import Control.TxtProveedor;
+import Model.Proveedor;
+import Model.ListaDeProveedores;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  *
@@ -14,10 +31,14 @@ public class VentanaProveedores extends javax.swing.JFrame {
 
     private VentanaPrincipal root;
     private GestionProductos gestion;
+    private ListaDeProveedores model;
+    private Save save;
+    
 
 
-    public VentanaProveedores(GestionProductos gestion) {
+    public VentanaProveedores(GestionProductos gestion, ListaDeProveedores model ) {
         
+        this.model = model;
         gestion.setRoot(this);
         this.gestion = gestion;
         
@@ -32,9 +53,7 @@ public class VentanaProveedores extends javax.swing.JFrame {
         Icon iconBanner = new ImageIcon(banner.getImage().getScaledInstance(LabelBannerUV.getWidth(), LabelBannerUV.getHeight(), Image.SCALE_DEFAULT));
         LabelBannerUV.setIcon(iconBanner);
         
-        
     }
-
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -43,8 +62,8 @@ public class VentanaProveedores extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Ventana = new javax.swing.JPanel();
         TITULO = new javax.swing.JLabel();
-        Labelnombre = new javax.swing.JLabel();
         buttonAtras = new javax.swing.JButton();
+        Labelnombre = new javax.swing.JLabel();
         FieldNombre = new javax.swing.JTextField();
         LabelTelefono = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -79,11 +98,6 @@ public class VentanaProveedores extends javax.swing.JFrame {
         TITULO.setText("AÑADIR PROVEEDORES");
         Ventana.add(TITULO, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
 
-        Labelnombre.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        Labelnombre.setForeground(new java.awt.Color(0, 0, 0));
-        Labelnombre.setText("NOMBRE:");
-        Ventana.add(Labelnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
-
         buttonAtras.setBackground(new java.awt.Color(204, 255, 204));
         buttonAtras.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonAtras.setForeground(new java.awt.Color(0, 0, 0));
@@ -94,6 +108,11 @@ public class VentanaProveedores extends javax.swing.JFrame {
             }
         });
         Ventana.add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 130, 50));
+
+        Labelnombre.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        Labelnombre.setForeground(new java.awt.Color(0, 0, 0));
+        Labelnombre.setText("NOMBRE:");
+        Ventana.add(Labelnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
 
         FieldNombre.setBackground(new java.awt.Color(102, 255, 204));
         FieldNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +246,6 @@ public class VentanaProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldTelefonoActionPerformed
 
     private void FieldTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldTelefonoKeyTyped
-        //
         char dato = evt.getKeyChar();
 
         if (Character.isLetter(dato)) {
@@ -238,11 +256,17 @@ public class VentanaProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldTelefonoKeyTyped
 
     private void FieldIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldIDActionPerformed
-        // TODO add your handling code here:
+        // 
     }//GEN-LAST:event_FieldIDActionPerformed
 
     private void FieldIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldIDKeyTyped
-        // TODO add your handling code here:
+        char dato = evt.getKeyChar();
+
+        if (Character.isLetter(dato)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "INGRESE SOLO NÚMEROS");
+        }
     }//GEN-LAST:event_FieldIDKeyTyped
 
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
@@ -250,9 +274,63 @@ public class VentanaProveedores extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_buttonAtrasActionPerformed
 
+  
+    public boolean userExist(String Id) {
+        boolean user = false;
+        try {
+            FileReader fileReaderLeer = new FileReader("src/Persistencia/Proveedores.txt");
+            BufferedReader write = new BufferedReader(fileReaderLeer);
+            String place = "";
+            
+            while ((place = write.readLine()) != null) {
+                if (place.indexOf(Id) != -1) {
+                    user = true;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return user;
+    }
+
+    
+
+
     private void buttonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarActionPerformed
-        this.root.setVisible(true);
-        this.setVisible(false);
+        if (evt.getSource() == buttonGuardar){
+        try{
+            TxtProveedor  archivo = new TxtProveedor();
+            archivo.inicializarTextoProveedor();
+            
+            String codigo = (FieldID.getText());
+            String nombre = FieldNombre.getText();
+            String telefono = (FieldTelefono.getText());
+            String categoria = BoxCategoria.getSelectedItem().toString();
+                
+
+            if ("".equals(codigo)){
+                JOptionPane.showMessageDialog(null,"DEBES LLENAR TODOS LOS CAMPOS");
+            }else if ("".equals(nombre)){
+                JOptionPane.showMessageDialog(null,"DEBES LLENAR TODOS LOS CAMPOS");
+            }else if ("".equals(telefono)){
+                JOptionPane.showMessageDialog(null,"DEBES LLENAR TODOS LOS CAMPOS");
+            }else if ("".equals(categoria)){
+                JOptionPane.showMessageDialog(null,"DEBES LLENAR TODOS LOS CAMPOS");
+            }else if (userExist(FieldID.getText())){
+                JOptionPane.showMessageDialog(rootPane, "ESTE NÚMERO DE CODIGO YA EXISTE");
+            }else{
+                Proveedor proveedor = new Proveedor(codigo, nombre, telefono, categoria);
+                model.añadirProveedor(proveedor);
+                archivo.escribirProveedor(proveedor);
+                save.getProveedor().add(proveedor);
+                JOptionPane.showMessageDialog(rootPane, "PROVEEDOR CREADO");
+            }     
+        } catch (NullPointerException ex){
+               FieldID.setText("");
+               FieldNombre.setText("");
+               FieldTelefono.setText("");
+        }
+    }
     }//GEN-LAST:event_buttonGuardarActionPerformed
 
     private void buttonGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardar1ActionPerformed

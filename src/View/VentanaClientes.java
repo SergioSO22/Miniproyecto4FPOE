@@ -1,6 +1,23 @@
+/*
+    @Proyecto: 
+    MiniProyecto #4 - Supermercado Univalle
+    @Author: 
+    Wilson Andrés Mosquera.
+    Sergio André Sanchez.
+    @Profesor:
+    Luis Yovany Romo Portilla
+*/
+
 package View;
 
+import Control.Save;
+import Control.txtCliente;
+import Model.Cliente;
+import Model.ListaDeClientes;
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -15,8 +32,12 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class VentanaClientes extends javax.swing.JFrame {
  
     private VentanaPrincipal root;
+    private ListaDeClientes model;
+    private Save save;
     
-    public VentanaClientes() {
+    public VentanaClientes(ListaDeClientes model) {
+        
+        this.model = model;
         initComponents();
         setTitle("Supermercado Univalle");
         setLocationRelativeTo(null);
@@ -43,13 +64,13 @@ public class VentanaClientes extends javax.swing.JFrame {
         LabelCorreo = new javax.swing.JLabel();
         FieldNombre = new javax.swing.JTextField();
         FieldTipoDocumento = new javax.swing.JComboBox<>();
+        buttonAtras = new javax.swing.JButton();
         FieldDocumento = new javax.swing.JTextField();
         FieldTelefono = new javax.swing.JTextField();
         FieldDireccion = new javax.swing.JTextField();
         FieldCorreo = new javax.swing.JTextField();
         buttonGuardar = new javax.swing.JButton();
         LabeImagen = new javax.swing.JLabel();
-        buttonAtras = new javax.swing.JButton();
         buttonAtras2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -121,6 +142,17 @@ public class VentanaClientes extends javax.swing.JFrame {
         });
         Ventana.add(FieldTipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 370, 200, -1));
 
+        buttonAtras.setBackground(new java.awt.Color(255, 153, 255));
+        buttonAtras.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonAtras.setForeground(new java.awt.Color(0, 0, 0));
+        buttonAtras.setText("ATRAS");
+        buttonAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtrasActionPerformed(evt);
+            }
+        });
+        Ventana.add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 130, 50));
+
         FieldDocumento.setBackground(new java.awt.Color(204, 102, 255));
         FieldDocumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,17 +208,6 @@ public class VentanaClientes extends javax.swing.JFrame {
 
         LabeImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FiguraGM.png"))); // NOI18N
         Ventana.add(LabeImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 390, 670, 290));
-
-        buttonAtras.setBackground(new java.awt.Color(255, 153, 255));
-        buttonAtras.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        buttonAtras.setForeground(new java.awt.Color(0, 0, 0));
-        buttonAtras.setText("ATRAS");
-        buttonAtras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAtrasActionPerformed(evt);
-            }
-        });
-        Ventana.add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 130, 50));
 
         buttonAtras2.setBackground(new java.awt.Color(255, 153, 255));
         buttonAtras2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -274,9 +295,66 @@ public class VentanaClientes extends javax.swing.JFrame {
         //
     }//GEN-LAST:event_FieldNombreActionPerformed
 
+    public boolean userExist(String Id) {
+        boolean user = false;
+        try {
+            FileReader fileReaderLeer = new FileReader("src/Persistencia/Clientes.txt");
+            BufferedReader write = new BufferedReader(fileReaderLeer);
+            String place = "";
+            
+            while ((place = write.readLine()) != null) {
+                if (place.indexOf(Id) != -1) {
+                    user = true;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return user;
+    }
+    
     private void buttonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarActionPerformed
-        this.root.setVisible(true);
-        this.setVisible(false);
+        if (evt.getSource() == buttonGuardar){
+        try{
+            txtCliente  archivo = new txtCliente();
+            archivo.inicializarTextoCliente();
+            
+            String nombre = FieldNombre.getText();
+            String documento = FieldDocumento.getText();
+            String tipoDocumento = FieldTipoDocumento.getSelectedItem().toString();
+            String direccion = FieldDireccion.getText();
+            String correo = FieldCorreo.getText();
+            String telefono = FieldTelefono.getText();
+
+            if ("".equals(nombre)){
+                JOptionPane.showMessageDialog(null,"DEBES LLENAR TODOS LOS CAMPOS");
+            }else if ("".equals(documento)){
+                JOptionPane.showMessageDialog(null,"DEBES LLENAR TODOS LOS CAMPOS");
+            }else if ("".equals(tipoDocumento)){
+                JOptionPane.showMessageDialog(null,"DEBES LLENAR TODOS LOS CAMPOS");
+            }else if ("".equals(direccion)){
+                JOptionPane.showMessageDialog(null,"DEBES LLENAR TODOS LOS CAMPOS");
+            }else if ("".equals(correo)){
+                JOptionPane.showMessageDialog(null,"DEBES LLENAR TODOS LOS CAMPOS");
+            }else if ("".equals(telefono)){
+                JOptionPane.showMessageDialog(null,"DEBES LLENAR TODOS LOS CAMPOS");
+            }else if (userExist(FieldDocumento.getText())){
+                JOptionPane.showMessageDialog(rootPane, "ESTE NÚMERO DE DOCUMENTO YA EXISTE");
+            }else{
+                Cliente clientes = new Cliente( nombre,  documento,  tipoDocumento,  telefono,  direccion, correo );
+                model.añadirCliente(clientes);
+                archivo.escribirCita(clientes);
+                save.getCitas().add(clientes);
+                JOptionPane.showMessageDialog(rootPane, "CLIENTE AÑADIDO A LA BASE DE DATOS.");
+            }     
+        } catch (NullPointerException ex){
+               FieldNombre.setText("");
+               FieldDocumento.setText("");
+               FieldDireccion.setText("");
+               FieldCorreo.setText("");
+               FieldTelefono.setText("");
+        }
+    }
     }//GEN-LAST:event_buttonGuardarActionPerformed
 
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
@@ -285,7 +363,7 @@ public class VentanaClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAtrasActionPerformed
 
     private void buttonAtras2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtras2ActionPerformed
-        // TODO add your handling code here:
+        //
     }//GEN-LAST:event_buttonAtras2ActionPerformed
 
     public void setRoot(VentanaPrincipal root) {

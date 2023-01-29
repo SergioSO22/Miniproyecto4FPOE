@@ -1,3 +1,13 @@
+/*
+    @Proyecto: 
+    MiniProyecto #4 - Supermercado Univalle
+    @Author: 
+    Wilson Andrés Mosquera.
+    Sergio André Sanchez.
+    @Profesor:
+    Luis Yovany Romo Portilla
+*/
+
 package Control;
 import Model.Producto;
 import java.util.ArrayList;
@@ -64,7 +74,6 @@ public class TablaProductos implements TableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Producto p = productos.get(rowIndex);
         Object valor = null;
-       // int valor = null;
 
         switch (columnIndex){
             case 0 ->  {

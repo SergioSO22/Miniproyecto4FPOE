@@ -1,3 +1,12 @@
+/*
+    @Proyecto: 
+    MiniProyecto #4 - Supermercado Univalle
+    @Author: 
+    Wilson Andrés Mosquera.
+    Sergio André Sanchez.
+    @Profesor:
+    Luis Yovany Romo Portilla
+*/
 
 package Model;
 import java.io.Serializable;
@@ -7,6 +16,7 @@ import java.util.ArrayList;
  *
  * @author Sergio Sánchez
  */
+
 public class Producto implements Serializable {
     
    private String nombre;
@@ -15,8 +25,6 @@ public class Producto implements Serializable {
    private String categoria;
    private ArrayList<Producto> productos;
    
-   //private String Productos[] = {"Gaseosa", "Cafe", "Cerveza", "Manzana", "Almuerzo", "Pan", "Shampoo", "Crema", "Jabón"};
-   //private int Precio[] = {5500, 2500, 4000, 1500, 10000, 3000, 18000, 7400, 3600};
    
    public Producto(String nombre, int precio, int cantidad, String categoria){
        this.nombre = nombre;
@@ -71,7 +79,6 @@ public class Producto implements Serializable {
            return false;
        }
    }
-   
    
     @Override
     public String toString() {

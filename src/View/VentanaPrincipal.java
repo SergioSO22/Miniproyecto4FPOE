@@ -1,3 +1,13 @@
+/*
+    @Proyecto: 
+    MiniProyecto #4 - Supermercado Univalle
+    @Author: 
+    Wilson Andrés Mosquera.
+    Sergio André Sanchez.
+    @Profesor:
+    Luis Yovany Romo Portilla
+*/
+
 package View;
 
 import java.awt.Image;
@@ -42,14 +52,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Icon iconBanner = new ImageIcon(banner.getImage().getScaledInstance(LabelBannerUV.getWidth(), LabelBannerUV.getHeight(), Image.SCALE_DEFAULT));
         LabelBannerUV.setIcon(iconBanner);
         
-        
-        
         repaint();
     }
 
-    public VentanaPrincipal() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
    
     @SuppressWarnings("unchecked")

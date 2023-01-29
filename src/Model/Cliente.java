@@ -1,80 +1,99 @@
+/*
+    @Proyecto: 
+    MiniProyecto #4 - Supermercado Univalle
+    @Author: 
+    Wilson Andrés Mosquera.
+    Sergio André Sanchez.
+    @Profesor:
+    Luis Yovany Romo Portilla
+*/
 
 package Model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.io.Serializable;
 
-/**
- *
- * @author Sergio Sánchez
- */
-public class Cliente implements Serializable {
+public class Cliente implements Serializable{
     
-       private String nombre;
-    private String iD;
-    
-    private ArrayList<HashMap<String,String>> carrito;
+    private String nombre;
+    private String documento;
+    private String tipoDocumento;
+    private String direccion;
+    private String correo;
+    private String telefono;
 
-    public Cliente(String nombre, String iD) {
+    public Cliente(String nombre, String documento, String tipoDocumento, String telefono, String direccion, String correo ) {
         this.nombre = nombre;
-        this.iD = iD;
-        carrito = new ArrayList<>();
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setiD(String iD) {
-        this.iD = iD;
+        this.documento = documento;
+        this.tipoDocumento = tipoDocumento;
+        this.direccion = direccion;
+        this.correo = correo;
+        this.telefono = telefono;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getiD() {
-        return iD;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public ArrayList<HashMap<String, String>> getCarrito() {
-        return carrito;
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public String getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
     
-    public void agregarProductoAlCarrito(String cualProducto, int precio){
-        HashMap<String,String> producto = new HashMap<>();
-        int cantidad = 1;
-        int indice = 0;
-        boolean encontrado = false;
-        for(HashMap<String, String> p : carrito){
-            if(p.get("nombre").equals(cualProducto)){
-                encontrado = true;
-                cantidad = Integer.parseInt(p.get("cantidad")) + 1;
-                break;
-            }
-            indice++;
-        }
-        
-        producto.put("nombre", cualProducto);
-        producto.put("precio", Integer.toString(precio));
-        producto.put("cantidad", Integer.toString(cantidad));
-        
-        if(encontrado){
-            carrito.set(indice, producto);
-        }
-        else{
-            carrito.add(producto);
-        }
+    public String datos(){
+        return nombre + ";" + tipoDocumento + ";" + documento + ";" + direccion + ";" + correo + ";" + telefono;
+    }    
+
+
+    @Override
+    public String toString() {
+        return String.format(
+                "%s * %s * %s * %s * %s * %s *",
+                this.nombre,
+                this.tipoDocumento,
+                this.documento,
+                this.direccion,
+                this.correo,
+                this.telefono
+        );
     }
-    
-    public void eliminarProducto(int cualProducto){
-        carrito.remove(cualProducto);
-    }
-    
-    public void limpiarCarrito(){
-        carrito.clear();
-    }
-    
-    
 }

@@ -1,16 +1,27 @@
+/*
+    @Proyecto: 
+    MiniProyecto #4 - Supermercado Univalle
+    @Author: 
+    Wilson Andrés Mosquera.
+    Sergio André Sanchez.
+    @Profesor:
+    Luis Yovany Romo Portilla
+*/
+
 package View;
 
 import Model.ListaDeProductos;
 import Model.Producto;
 import Model.Ventas;
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner.DefaultEditor;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,7 +38,8 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
     int precio = 0;
     int cantidad = 0;
     DefaultTableModel model = new DefaultTableModel();
-    ArrayList<Ventas> listaVentas = new ArrayList<Ventas>();
+    SpinnerNumberModel modeloSpinner = new SpinnerNumberModel();
+    ArrayList<Ventas> listaVentas = new ArrayList<>();
 
     
     public VentanaVentas(ListaDeProductos productos) {
@@ -37,6 +49,8 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);  
 
+        modeloSpinner.setMaximum(20);
+        modeloSpinner.setMinimum(1);
         
         //Gestión de imagenes
 
@@ -132,7 +146,11 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         LabelPrecio = new javax.swing.JLabel();
         FieldCantidad = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaVenta = new javax.swing.JTable();
+        TablaVenta = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int columnIndex){
+                return false;
+            }
+        };
         LabelCantidad = new javax.swing.JLabel();
         LabelSubtotal = new javax.swing.JLabel();
         LabelIva = new javax.swing.JLabel();
@@ -438,7 +456,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
     }//GEN-LAST:event_buttonAtrasActionPerformed
 
     private void FieldPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldPrecioActionPerformed
-        
+        //
     }//GEN-LAST:event_FieldPrecioActionPerformed
 
     private void FieldTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldTotalActionPerformed
@@ -493,19 +511,22 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
         venta.setCantidad(cantidad);
         venta.setImporte(precio*cantidad);
         
-        if(BuscarVenta(venta)){
-            listaVentas.add(venta);
+        Producto productoAdded = productos.getProductos().get(getIndiceProducto(venta.getNombre()));
+        
+        if (productoDisponible(productoAdded, venta)) {
+            if (!BuscarVenta(venta)){
+                listaVentas.add(venta);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "PRODUCTO AGOTADO");
         }
-                
-                
-        listaVentas.add(venta);
         ActualizarTabla();
         borrarVenta();
         
     }//GEN-LAST:event_buttonAddActionPerformed
-
+    
     private void FieldImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldImporteActionPerformed
-        // TODO add your handling code here:
+        //
     }//GEN-LAST:event_FieldImporteActionPerformed
 
     private void FieldCantidadStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_FieldCantidadStateChanged
@@ -547,7 +568,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
             añadirPrecio(productos.getProductos().get(7));
             CalcularPrecio();
         } else if(evento.getSource() == lJabon){
-            FieldProducto.setText("Jabon");
+            FieldProducto.setText("Jabón");
             añadirPrecio(productos.getProductos().get(8));
             CalcularPrecio();
         } else {
@@ -558,21 +579,77 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
     
     public boolean BuscarVenta(Ventas nueva){
         for (Ventas v: listaVentas){
-            if(v.getNombre() == nueva.getNombre()){
+            if (v.getNombre().equals(nueva.getNombre())){
                 int nuevaCantidad = v.getCantidad() + nueva.getCantidad();
-                v.setImporte((int) (v.getPrecio()* nuevaCantidad));
+                v.setCantidad(nuevaCantidad);
+                v.setImporte(v.getPrecio()* nuevaCantidad);
                 return true;
             }
         }
         return false;
     } 
     
+    public void restablecerProducto(ArrayList<String> producto){
+        String nombre = producto.get(0);
+        int cantidad = Integer.parseInt(producto.get(1));
+        System.out.println(cantidad);
+        System.out.println(nombre);
+            for(Producto p : productos.getProductos()){
+                if(p.getNombre().equals(nombre)){
+                    int cantidadP = p.getCantidad();
+                    p.setCantidad(cantidad + cantidadP);
+                    break;
+                }
+            }
+        }
+    
+    public void EliminarProducto(Ventas lista){
+        int productSelected = TablaVenta.getSelectedRow(); 
+        if (productSelected >= 0) {
+           model.removeRow(productSelected);
+           borrarVenta();    
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecciona la fila");
+        }
+    }
+    
+    
+    public boolean productoDisponible(Producto products, Ventas venta){
+        if (products.getCantidad() >= venta.getCantidad()) {
+            int newCantidad = products.getCantidad() - venta.getCantidad();
+            products.setCantidad(newCantidad);
+            return true;
+        }else {
+            return false;
+        }
+    }
     
     public void añadirPrecio(Producto products){
         String textoField = FieldProducto.getText();
         if (textoField.equals(products.getNombre())){
             FieldPrecio.setText(String.valueOf(products.getPrecio()));
         }
+    }
+    
+    public int getIndiceProducto(String cualProducto){
+        int indice = 0;
+        for(Producto p : productos.getProductos()){
+            if(p.getNombre().equalsIgnoreCase(cualProducto)){
+                break;
+            }
+            indice++;
+        }
+        return indice;
+    }
+    
+    public ArrayList<String> getProductoInfo(int cualProducto){
+        String nombre = (String) model.getValueAt(cualProducto, 0);
+        String cantidad = model.getValueAt(cualProducto, 2).toString();
+        
+        ArrayList<String> info = new ArrayList<>();
+        info.add(nombre);
+        info.add(cantidad);
+        return info;
     }
     
     public void CalcularPrecio(){
@@ -610,6 +687,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
     public void borrarVenta(){
         precio = 0;
         cantidad = 0;
+        CalcularPrecio();
     }
     
     public void setRoot(VentanaPrincipal root) {
@@ -640,7 +718,7 @@ public class VentanaVentas extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JLabel LabelTotal1;
     private javax.swing.JTable TablaVenta;
     private javax.swing.JPanel Ventana;
-    private javax.swing.JButton buttonAdd;
+    public javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonAtras;
     private javax.swing.JLabel imagenM;
     private javax.swing.JScrollPane jScrollPane1;

@@ -1,3 +1,13 @@
+/*
+    @Proyecto: 
+    MiniProyecto #4 - Supermercado Univalle
+    @Author: 
+    Wilson Andrés Mosquera.
+    Sergio André Sanchez.
+    @Profesor:
+    Luis Yovany Romo Portilla
+*/
+
 package Control;
 import Model.Producto;
 import java.util.ArrayList;
@@ -57,18 +67,7 @@ public class TablaGestion implements TableModel{
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (categoriaProveedor == "Bebidas") {
-            return rowIndex <= 2 && columnIndex == 2;
-        } else if (categoriaProveedor == "Comida"){
-            if (rowIndex >2 && rowIndex <6){
-                if (columnIndex == 2){
-                    return true;
-                }
-            }
-            } else if (categoriaProveedor == "Aseo") {
-                return (rowIndex >5 && columnIndex == 2);
-                }
-        return false;
+        return columnIndex == 2;
     }
     
 
@@ -76,7 +75,6 @@ public class TablaGestion implements TableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Producto p = productos.get(rowIndex);
         Object valor = null;
-       // int valor = null;
 
         switch (columnIndex){
             case 0: {
